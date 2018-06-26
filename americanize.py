@@ -1777,16 +1777,15 @@ for _a,_b in wordback:
         if l > 0:
             indices = [m.start() for m in re.finditer(a, filedata)]
             for ind in indices:
-                oldbit = filedata[ind-padding:ind+padding]
+                oldbit = filedata[max(0,ind-padding):ind+padding]
                 newbit = oldbit.replace(a,b)
-                print("'... {0:50s} ...' - > '... {1:50s} ...'".format(''.join(oldbit.split('\n')),''.join(newbit.split('\n'))))
+                print("'... {0:50s} ...' - > '... {1:50s} ...'".format(' '.join(oldbit.split('\n')),' '.join(newbit.split('\n'))))
             filedata = filedata.replace(a,b)
             count += l
 
-print('')
-print('Finished Americanization of {0:d}'.format(sys.argv[1]))
-print('{0:d} changes made.'.format(count))
-print('------------------------')
+print 'Finished Americanization of', sys.argv[1]
+print '{0:d} changes made.'.format(count)
+print '------------------------'
 
 if len(sys.argv) > 2:
     outfile = sys.argv[2]
